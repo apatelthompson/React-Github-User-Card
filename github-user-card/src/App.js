@@ -50,7 +50,8 @@ class App extends React.Component {
   render() {
     console.log("data", this.state.data);
     return (
-      <div>
+      <div className="App">
+        <h1>Welcome to Avni's Github Cards</h1>
         <CardList
           dataProp={this.state.data}
           followerProp={this.state.followers}

@@ -7,7 +7,7 @@ const CardList = props => {
     <div className="card-list">
       <Card user={props.dataProp} />
       {props.followerProp.map(follower => {
-        return <Card user={follower} />;
+        return <Card key={follower.id} user={follower} />;
       })}
     </div>
   );
