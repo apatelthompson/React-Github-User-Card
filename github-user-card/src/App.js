@@ -51,7 +51,7 @@ class App extends React.Component {
     console.log("data", this.state.data);
     return (
       <div className="App">
-        <h1>Welcome to Avni's Github Cards</h1>
+        <h1 className="welcome">Welcome to Avni's Github Cards</h1>
         <CardList
           dataProp={this.state.data}
           followerProp={this.state.followers}
