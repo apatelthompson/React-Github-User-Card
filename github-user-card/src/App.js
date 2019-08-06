@@ -18,13 +18,20 @@ class App extends React.Component {
     this.fetchFollowers();
   }
 
+  componentDidUpdate() {
+    console.log();
+  }
+
   fetchData = response => {
     fetch("https://api.github.com/users/apatelthompson")
       .then(response => {
         console.log("response", response);
         return response.json();
       })
-      .then(card => this.setState({ data: card.response }))
+      .then(card => {
+        console.log(card);
+        this.setState({ data: card });
+      })
       .catch(err => console.log("error"));
   };
 
@@ -33,14 +40,21 @@ class App extends React.Component {
       .then(response => {
         return response.json();
       })
-      .then(follower => this.setState({ followers: follower.response }))
+      .then(follower => {
+        console.log(follower);
+        this.setState({ followers: follower });
+      })
       .catch(err => console.log("error"));
   };
 
   render() {
+    console.log("data", this.state.data);
     return (
       <div>
-        <CardList dataProp={this.state.data} />
+        <CardList
+          dataProp={this.state.data}
+          followerProp={this.state.followers}
+        />
       </div>
     );
   }
