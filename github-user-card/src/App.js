@@ -1,26 +1,49 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import CardList from "./CardList";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import "./App.css";
+
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      data: {},
+      followers: []
+    };
+    console.log(this.state);
+  }
+
+  componentDidMount() {
+    this.fetchData();
+    this.fetchFollowers();
+  }
+
+  fetchData = response => {
+    fetch("https://api.github.com/users/apatelthompson")
+      .then(response => {
+        console.log("response", response);
+        return response.json();
+      })
+      .then(card => this.setState({ data: card.response }))
+      .catch(err => console.log("error"));
+  };
+
+  fetchFollowers = response => {
+    fetch("https://api.github.com/users/apatelthompson/followers")
+      .then(response => {
+        return response.json();
+      })
+      .then(follower => this.setState({ followers: follower.response }))
+      .catch(err => console.log("error"));
+  };
+
+  render() {
+    return (
+      <div>
+        <CardList dataProp={this.state.data} />
+      </div>
+    );
+  }
 }
 
 export default App;
